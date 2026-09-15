@@ -607,3 +607,8 @@ transform: translateX(-50%) rotate(-2deg) scale(0.94);
     }
 }
 
+@media (max-width: 600px;) {
+body {
+    overflow-x: hidden;
+}
+}
