@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Surprise</title>
+    <link rel="stylesheet" href="style.css" />
+   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+</head>
+<body>
+    <div id="scene">
+        <div id="balloonContainer"></div>
+        <p id= "intro-message"> Click the spooky ghost below!</p>
+        <button id="ghostButton">👻</button>
+
+        <div id="message-note"></div>
+
+        <div class="card-deck" id="cardDeck">
+             <div class="memory-card" style="--i: 1; --delay: 0s; --fan-x: -180px; --fan-y: 55.8px; --fan-rotate: -20deg; --bg: url('images/Untitled design (2).png');">
+                <div class="card-message">
+                    <h3>Leah</h3>
+                    <p>
+                        I have so many favorite memories with you, but the one that sticks out to me the most is when we were in minecraft and you were lagging so bad thinking haley was in front of you and you were hitting nothing but air.. CLASSIC
+                    </p>
+                </div>
+            </div>
+            <div class="memory-card" style="--i: 2; --delay: 0.08s; --fan-x: -90px; --fan-y: 16px; --fan-rotate: -10deg; --bg: url('images/Untitled design (2).png');">
+                <div class="card-message">
+                    <h3>Cassie</h3>
+                    <p>
+                        My favorite memory with you is when we were playing phas and the ghost literally started coming towards both of us, we screamed and we both took off leaving everybody in the house lol.    
+                    </p>
+                </div>
+            </div>
+            <div class="memory-card" style="--i: 3; --delay: 0.16s; --fan-x: 0px; --fan-y: -8px; --fan-rotate: 0deg; --bg: url('images/Untitled design (2).png');">
+                <div class="card-message">
+                    <h3>Our Wish to You!</h3>
+                    <p>
+                        We wish that this year brings you all the little things that make you the happiest, more late-night laughs, rage-baiting us, questionable minecraft decisions, and hilarious typos for us to bully you. Happy Birthday Spooky!
+                    </p>
+                </div>
+            </div>
+            <div class="memory-card" style="--i: 4; --delay: 0.24s; --fan-x: 90px; --fan-y: 16px; --fan-rotate: 10deg; --bg: url('images/Untitled design (2).png');">
+                <div class="card-message">
+                    <h3>Lexi</h3>
+                    <p>
+                        My favorite memory with you is when you were at a jason derulo concert and you said you couldn't wait for 'Daddy's Home' to play.
+                    </p>
+                </div>
+            </div>
+            <div class="memory-card" style="--i: 5; --delay: 0.32s; --fan-x: 180px; --fan-y: 55.8px; --fan-rotate: 20deg; --bg: url('images/Untitled design (2).png');">
+                <div class="card-message">
+                    <h3>Haley</h3>
+                    <p>
+                        My favorite memory with you is you getting rage baited in Bo6, and you calling someone a twink when you really meant twerp and that they could twink around all they want lol.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button id="ghostNextButton" aria-label="Go to the next surprise">👻</button>
+
+        <canvas id="sparkleCanvas"></canvas>
+    </div>
+<section id="nextThings"> 
+    <div id="cakeScene"> <h2>Make a wish, Spooky! 🎂</h2> <div id="cakeContainer"> <model-viewer src="spookycake.glb" camera-controls autoplay style="width: 100%; height: 500px;"></model-viewer>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

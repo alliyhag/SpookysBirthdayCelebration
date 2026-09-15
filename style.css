@@ -1,0 +1,609 @@
+@font-face {
+    font-family: 'CHICKEN_Pie';
+    src: url('CHICKEN_Pie.ttf') format('truetype');
+}
+@font-face {
+font-family: 'Honeymoon';
+src: url('Honeymoon.otf') format('opentype');
+}
+
+@font-face {
+font-family: 'Rainbow_After_Rain';
+src: url('Rainbow\ After\ Rain\ Sans.ttf') format('truetype');
+}
+
+:root {
+    --anim-duration: 0.65s;
+    --anim-bounce: cubic-bezier(.2, .8, .2, 1);
+}
+
+body {
+margin: 0;
+min-height: 100vh;
+background: linear-gradient(to bottom, #1d283d, #273755, #476396);
+background-attachment: fixed;
+overflow-x: hidden;
+overflow-y: auto;
+}
+
+
+#intro-message {
+    position: fixed;
+    left: 40%;
+    top: 50%;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'CHICKEN Pie';
+    color: #f7e7c6;
+   
+}
+
+#scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#scene::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 14, 28, 0.36);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.55s ease, backdrop-filter 0.55s ease;
+    z-index: 14;
+}
+
+#scene.card-focus::before {
+    opacity: 1;
+    backdrop-filter: blur(8px) saturate(0.8);
+    -webkit-backdrop-filter: blur(8px) saturate(0.8);
+}
+
+#ghostButton {
+    position: fixed;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    display: block;
+    padding: 10px 18px;
+    font-size: 45px;
+    background-color: transparent;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    animation: none;
+    z-index: 20;
+}
+#ghostButton:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    background-color: rgba(65, 83, 117, 0.25);
+    text-shadow: #6c83ad;
+    animation: ghostWiggle 0.6s ease-in-out infinite;
+
+}
+
+#ghostNextButton {
+    position: fixed;
+    right: 36px;
+    bottom: 32px;
+    padding: 10px 18px;
+    font-size: 42px;
+    background-color: transparent;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.25s ease, background-color 0.25s ease, opacity 0.5s ease;
+}
+
+#ghostNextButton.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#ghostNextButton:hover {
+    transform: translateY(-8px) scale(1.08) rotate(5deg);
+    background-color: rgba(65, 83, 117, 0.25);
+}
+
+#nextThings {
+    height: 100vh;
+    position: relative;
+    padding: 120px 24px;
+    box-sizing: border-box;
+    text-align: center;
+    background: transparent;
+    color: #f7e7c6;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, visibility 0.8s ease, transform 0.8s ease;
+}
+
+#nextThings.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#nextThings h2 {
+    margin: 0 0 16px;
+    font-family: 'CHICKEN Pie';
+    font-size: 36px;
+}
+
+#nextThings p {
+    margin: 0;
+    color: #f7e7c6;
+}
+
+#cakeScene {
+position: relative;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+#cakeScene h2 {
+margin: 0 0 35px;
+font-family: 'CHICKEN Pie';
+font-size: 42px;
+color: #f7e7c6;
+}
+
+#cakeContainer {
+position: relative;
+margin-top: -50px;
+width: 100%;
+max-width: 600px;
+}
+
+#birthdayCake {
+display: block;
+width: 100%;
+height: auto;
+object-fit: contain;
+}
+
+#candleArea {
+position: absolute;
+top: 10%;
+left: 50%;
+transform: translateX(-50%);
+width: 70px;
+height: 100px;
+cursor: pointer;
+}
+
+#flame {
+position: absolute;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+font-size: 38px;
+transform-origin: bottom center;
+animation: flameFlicker 0.18s ease-in-out infinite alternate;
+}
+
+#cakeMessage {
+margin: 30px 0 0;
+font-family: 'CHICKEN Pie';
+font-size: 20px;
+color: #f7e7c6;
+}
+
+@keyframes flameFlicker {
+0% {
+transform: translateX(-50%) rotate(-4deg) scale(1);
+}
+
+50% {
+transform: translateX(-50%) rotate(3deg) scale(1.08);
+}
+
+100% {
+transform: translateX(-50%) rotate(-2deg) scale(0.94);
+}
+}
+
+@keyframes ghostWiggle {
+    0% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-10px) rotate(5deg) ;
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+
+#sparkleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+#balloonContainer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#balloonContainer.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.card-deck {
+    position: fixed;
+    left: 50%;
+    top: 48%;
+    width: min(1500px, 96vw);
+    height: 360px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.7);
+    transition: opacity 0.7s ease, visibility 0.7s ease, transform 0.8s cubic-bezier(.2,.8,.2,1);
+    z-index: 15;
+}
+
+.card-deck.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.card-deck.leaving {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -42%) scale(0.82);
+    transition:
+        opacity 0.9s ease,
+        visibility 0.9s ease,
+        transform 0.9s cubic-bezier(.22, .61, .36, 1);
+}
+
+.card-deck.leaving .memory-card {
+    animation: cardFanOut 0.75s cubic-bezier(.55,.05,.68,.19) forwards;
+    animation-delay: calc((8 - var(--i)) * 0.04s);
+}
+
+@keyframes cardFanOut {
+    0% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            translateX(var(--fan-x))
+            translateY(var(--fan-y))
+            rotate(var(--fan-rotate))
+            scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            translateX(calc(var(--fan-x) * 1.35))
+            translateY(calc(var(--fan-y) + 80px))
+            rotate(calc(var(--fan-rotate) * 1.3))
+            scale(0.78);
+    }
+}
+
+.card,
+.memory-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 180px;
+    height: 260px;
+    border-radius: 22px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background-image: var(--bg, linear-gradient(135deg, #f5d9a8, #d39c63));
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform:
+        translate(-50%, -50%)
+        translateX(var(--fan-x))
+        translateY(var(--fan-y))
+        rotate(var(--fan-rotate));
+    cursor: pointer;
+    filter: saturate(1.1) contrast(1.02);
+    transform-origin: center center;
+}
+
+.card-deck.active .memory-card,
+.card-deck.active .card {
+    opacity: 1;
+    animation: cardFanIn 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+.card-deck.active .memory-card.revealed,
+.card-deck.active .card.revealed {
+    animation: none;
+}
+
+@keyframes cardFanIn {
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            translateX(0)
+            translateY(80px)
+            rotate(0deg)
+            scale(0.72);
+    }
+    65% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            translateX(var(--fan-x))
+            translateY(var(--fan-y))
+            rotate(var(--fan-rotate))
+            scale(1);
+    }
+}
+
+.memory-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(20, 15, 30, 0.72),
+        rgba(20, 15, 30, 0.08),
+        rgba(20, 15, 30, 0.18)
+    );
+    transition: background 0.45s ease, backdrop-filter 0.45s ease;
+}
+
+.memory-card:not(.open):hover {
+    transform:
+        translate(-50%, -50%)
+        translateX(var(--fan-x))
+        translateY(calc(var(--fan-y) - 22px))
+        rotate(var(--fan-rotate))
+        scale(1.03);
+    animation: cardHoverBounce 0.65s var(--anim-bounce) 1;
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.32);
+}
+
+@keyframes cardHoverBounce {
+    0%, 100% {
+        transform:
+            translate(-50%, -50%)
+            translateX(var(--fan-x))
+            translateY(calc(var(--fan-y) - 22px))
+            rotate(var(--fan-rotate))
+            scale(1.03);
+    }
+    25% {
+        transform:
+            translate(-50%, -50%)
+            translateX(var(--fan-x))
+            translateY(calc(var(--fan-y) - 36px))
+            rotate(var(--fan-rotate))
+            scale(1.06);
+    }
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateX(var(--fan-x))
+            translateY(calc(var(--fan-y) - 14px))
+            rotate(var(--fan-rotate))
+            scale(1.02);
+    }
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translateX(var(--fan-x))
+            translateY(calc(var(--fan-y) - 28px))
+            rotate(var(--fan-rotate))
+            scale(1.04);
+    }
+}
+
+.memory-card.open {
+    transform:
+        translate(-50%, -50%)
+        translateX(0)
+        translateY(-5vh)
+        rotate(0deg)
+        scale(1.5);
+    z-index: 30;
+    box-shadow: 0 28px 42px rgba(0, 0, 0, 0.35);
+}
+#scene.card-focus .memory-card:not(.open) {
+    filter: blur(6px) brightness(0.65);
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.memory-card.open::before {
+    background: rgba(18, 25, 40, 0.24);
+    backdrop-filter: blur(10px) saturate(1.3);
+    -webkit-backdrop-filter: blur(10px) saturate(1.3);
+}
+
+.card-message {
+    position: absolute;
+    inset: auto 10px 10px 10px;
+    padding: 14px 12px 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #fdf5ee;
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    transform: translateY(30px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.55s cubic-bezier(.2,.8,.2,1), opacity 0.55s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.memory-card.open .card-message {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-message h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    text-align: center;
+    color: #280800;
+    font-family: 'Rainbow After Rain';
+}
+
+.card-message p {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.45;
+    text-align: center;
+    color: #442D1C;
+    font-family: 'CHICKEN Pie';
+}
+
+.balloon {
+    position: relative;
+    bottom: -120px;
+    width: 80px;
+    height: 95px;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: left 0.8s ease-out, top 0.8s ease-out;
+}
+.balloon::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    top: 20px;
+    left: 20px;
+}
+.balloon.sway {
+    animation: balloonSway 3s ease-in-out infinite;
+}
+.balloon.floating {
+    animation: balloonFloat 3s ease-in-out infinite;
+}
+
+.balloon.popped {
+    animation: balloonPop 0.8s ease-out forwards;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 70px;
+    background: linear-gradient(to bottom, #fed7b8 ,#7a4044, #59171b);
+    left: 50%;
+    top: 100%;
+    transform-origin: top center;
+    animation: stringDangle 1.5s ease-in-out infinite;
+
+}
+@keyframes stringDangle {
+    0%, 100% { transform: rotate(-6deg); 
+    }
+    50% {transform: rotate(6deg); 
+    }
+}
+.balloonWord {
+    position:absolute;
+    transform: translate(-50%, -50%);
+    font-family: 'CHICKEN Pie';
+    font-size: 55px;
+    color: #f7e7c6;
+    text-shadow: 0 0 10px rgb(200, 144, 32);
+    pointer-events: none;
+    animation: wordReveal 0.6s ease-out;
+    white-space: nowrap;
+}
+
+
+@keyframes balloonSway {
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform:rotate(3deg);
+    }
+}
+
+@keyframes balloonFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+
+@keyframes balloonPop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+@keyframes wordReveal {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+    }
+    100% {
+
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
